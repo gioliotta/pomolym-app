@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "PomoLym",
+    "slug": "pomodoro-lym",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#ffffff"
+        }
+      ]
+    ],
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.gixi.pomodorolym"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "aaabfa71-8402-41c9-8d17-26ff7a49b9b9"
+      }
+    }
+  }
+}

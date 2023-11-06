@@ -1,0 +1,8 @@
+const HOME_PAGE = "Home",
+  CONFIG_PAGE = "Configuration";
+
+const POMO_MODE = "POMODORO",
+  SHORT_MODE = "SHORT",
+  LONG_MODE = "LONG";
+
+export { HOME_PAGE, CONFIG_PAGE, POMO_MODE, SHORT_MODE, LONG_MODE };

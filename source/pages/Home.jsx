@@ -3,9 +3,9 @@ import { StyleSheet, SafeAreaView, View, StatusBar } from "react-native";
 import Options from "../components/Options.jsx";
 import Time from "../components/Time.jsx";
 import Play from "../components/Play.jsx";
-import { LONG_MODE, POMO_MODE, SHORT_MODE } from "../utils/consts.js";
+import { POMO_MODE, SHORT_MODE, LONG_MODE } from "../utils/consts.js";
 import BetaMsg from "../components/BetaMsg.jsx";
-import SettingsIcon from "../components/SettingsIcon";
+import SettingsIcon from "../components/SettingsIcon.jsx";
 import { Audio } from "expo-av";
 
 function Home(props) {

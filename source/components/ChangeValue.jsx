@@ -2,19 +2,21 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, StyleSheet, Alert } from "react-native";
 
 function ChangeValue(props) {
-  const { textContent, currentTime, setChangeValue } = props,
+  const { textContent, setChangeValue, isSaving } = props,
     [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     if (inputValue === Number(inputValue)) {
-      setChangeValue(inputValue * 60);
+      if (isSaving) {
+        setChangeValue(inputValue * 60);
+      }
     }
 
     if (inputValue !== Number(inputValue) && inputValue !== "") {
       setInputValue("");
       Alert.alert("Only numbers are allowed.");
     }
-  }, [inputValue]);
+  }, [inputValue, isSaving]);
 
   return (
     <View style={container}>
@@ -22,8 +24,8 @@ function ChangeValue(props) {
 
       <TextInput
         style={input}
-        value={inputValue}
-        // placeholder={currentTime.toString()}
+        value={inputValue.toString()}
+        placeholder="enter the time"
         placeholderTextColor="#000"
         keyboardType="numeric"
         onChangeText={num => setInputValue(Number(num))}

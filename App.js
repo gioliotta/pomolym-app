@@ -1,14 +1,41 @@
-import React, { useState } from "react";
-import Home from "./source/pages/Home";
-import Configuration from "./source/pages/Configuration";
-import { HOME_PAGE, CONFIG_PAGE } from "./source/utils/consts.js";
+import React, { useState, useEffect } from "react";
+import Home from "./source/pages/Home.jsx";
+import Configuration from "./source/pages/Configuration.jsx";
+import {
+  HOME_PAGE,
+  CONFIG_PAGE,
+  POMO_MODE,
+  SHORT_MODE,
+  LONG_MODE,
+} from "./source/utils/consts.js";
+import { getStoreData } from "./source/utils/localData.js";
+
+const initialPomodoroValue = 25 * 60,
+  initialShortBreakValue = 5 * 60,
+  initialLongBreakValue = 30 * 60;
 
 function App() {
   const [thisPage, setThisPage] = useState(HOME_PAGE),
     [sounds, setSounds] = useState(false),
-    [valuePomodoro, setValuePomodoro] = useState(25 * 60),
-    [valueShortBreak, setValueShortBreak] = useState(5 * 60),
-    [valueLongBreak, setValueLongBreak] = useState(30 * 60);
+    [valuePomodoro, setValuePomodoro] = useState(initialPomodoroValue),
+    [valueShortBreak, setValueShortBreak] = useState(initialShortBreakValue),
+    [valueLongBreak, setValueLongBreak] = useState(initialLongBreakValue);
+
+  useEffect(async () => {
+    const storedPomodoroValue = await getStoreData(POMO_MODE),
+      storedShortBreakValue = await getStoreData(SHORT_MODE),
+      storedLongBreakValue = await getStoreData(LONG_MODE);
+
+    if (storedPomodoroValue) {
+      return setValuePomodoro(storedPomodoroValue);
+    }
+    if (storedShortBreakValue) {
+      return setValueShortBreak(storedShortBreakValue);
+    }
+    if (storedLongBreakValue) {
+      return setValueLongBreak(storedLongBreakValue);
+    }
+  }, []);
 
   if (thisPage === HOME_PAGE) {
     return (
@@ -28,6 +55,7 @@ function App() {
   if (thisPage === CONFIG_PAGE) {
     return (
       <Configuration
+        thisPage={thisPage}
         setThisPage={setThisPage}
         sounds={sounds}
         setSounds={setSounds}

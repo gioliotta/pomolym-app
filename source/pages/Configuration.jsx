@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,32 +10,39 @@ import {
 } from "react-native";
 import OptionConfig from "../components/OptionConfig.jsx";
 import ChangeValue from "../components/ChangeValue.jsx";
-import { HOME_PAGE } from "../utils/consts.js";
-// import DonationsBtn from "../components/DonationsBtn.jsx";
-// import NotificationTest from "../utils/notifications.js";
+import {
+  HOME_PAGE,
+  POMO_MODE,
+  SHORT_MODE,
+  LONG_MODE,
+} from "../utils/consts.js";
+import { setStoreData } from "../utils/localData.js";
 import {
   AntDesign as BackIcon,
   Octicons as VlmIcon,
   MaterialIcons as CleanIcon,
 } from "@expo/vector-icons";
 
- function Configuration(props) {
+function Configuration(props) {
   const {
-    setThisPage,
-    sounds,
-    setSounds,
-    valuePomodoro,
-    setValuePomodoro,
-    valueShortBreak,
-    setValueShortBreak,
-    valueLongBreak,
-    setValueLongBreak,
-  } = props;
+      setThisPage,
+      sounds,
+      setSounds,
+      valuePomodoro,
+      setValuePomodoro,
+      valueShortBreak,
+      setValueShortBreak,
+      valueLongBreak,
+      setValueLongBreak,
+    } = props,
+    [isSaving, setIsSaving] = useState(false);
 
-  // async function clearCache() {
-  //   Alert.alert("Cache deleted");
-  //   global.localStorage.clear();
-  // }
+  function saveChanges() {
+    setIsSaving(true);
+    setStoreData(POMO_MODE, valuePomodoro);
+    setStoreData(SHORT_MODE, valueShortBreak);
+    setStoreData(LONG_MODE, valueLongBreak);
+  }
 
   return (
     <SafeAreaView style={container}>
@@ -70,21 +77,25 @@ import {
 
         <ChangeValue
           textContent="Pomodoro"
-          // currentTime={valuePomodoro / 60}
+          isSaving={isSaving}
           setChangeValue={setValuePomodoro}
         />
 
         <ChangeValue
           textContent="Short Break"
-          // currentTime={valueShortBreak / 60}
+          isSaving={isSaving}
           setChangeValue={setValueShortBreak}
         />
 
         <ChangeValue
           textContent="Long Break"
-          // currentTime={valueLongBreak / 60}
+          isSaving={isSaving}
           setChangeValue={setValueLongBreak}
         />
+
+        <TouchableOpacity style={saveBtn} onPress={saveChanges}>
+          <Text>Save Changes</Text>
+        </TouchableOpacity>
       </View>
 
       {/*
@@ -133,5 +144,9 @@ const styles = StyleSheet.create({
       justifyContent: "center",
       rowGap: 25,
     },
+    saveBtn: {
+      backgroundColor: "red",
+      padding: 20,
+    },
   }),
-  { container, titleCont, title, contOptions } = styles;
+  { container, titleCont, title, contOptions, saveBtn } = styles;

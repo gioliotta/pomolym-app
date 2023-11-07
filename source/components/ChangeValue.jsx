@@ -1,14 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, StyleSheet, Alert } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { LONG_MODE, POMO_MODE, SHORT_MODE } from "../utils/consts";
 
 function ChangeValue(props) {
   const { textContent, setChangeValue, isSaving } = props,
     [inputValue, setInputValue] = useState("");
 
+  async function saveStoreData() {
+    switch (textContent) {
+      case POMO_MODE:
+        await AsyncStorage.setItem(POMO_MODE, JSON.stringify(inputValue * 60));
+        break;
+      case SHORT_MODE:
+        await AsyncStorage.setItem(SHORT_MODE, JSON.stringify(inputValue * 60));
+        break;
+      case LONG_MODE:
+        await AsyncStorage.setItem(LONG_MODE, JSON.stringify(inputValue * 60));
+        break;
+    }
+  }
+
   useEffect(() => {
     if (inputValue === Number(inputValue)) {
       if (isSaving) {
         setChangeValue(inputValue * 60);
+        saveStoreData();
       }
     }
 

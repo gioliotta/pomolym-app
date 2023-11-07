@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { TouchableOpacity, Text, StyleSheet, View } from "react-native";
 import * as Notifications from "expo-notifications";
+import { POMO_MODE } from "./consts.js";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -31,7 +32,7 @@ function NotificationActive() {
   async function schedulePushNotification() {
     await Notifications.scheduleNotificationAsync({
       content: {
-        title: "Pomodoro",
+        title: POMO_MODE,
         body: "Test Notification",
       },
       trigger: { seconds: 1 },

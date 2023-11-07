@@ -16,7 +16,6 @@ import {
   SHORT_MODE,
   LONG_MODE,
 } from "../utils/consts.js";
-import { setStoreData } from "../utils/localData.js";
 import {
   AntDesign as BackIcon,
   Octicons as VlmIcon,
@@ -28,20 +27,14 @@ function Configuration(props) {
       setThisPage,
       sounds,
       setSounds,
-      valuePomodoro,
       setValuePomodoro,
-      valueShortBreak,
       setValueShortBreak,
-      valueLongBreak,
       setValueLongBreak,
     } = props,
     [isSaving, setIsSaving] = useState(false);
 
   function saveChanges() {
     setIsSaving(true);
-    setStoreData(POMO_MODE, valuePomodoro);
-    setStoreData(SHORT_MODE, valueShortBreak);
-    setStoreData(LONG_MODE, valueLongBreak);
   }
 
   return (
@@ -76,19 +69,19 @@ function Configuration(props) {
         />
 
         <ChangeValue
-          textContent="Pomodoro"
+          textContent={POMO_MODE}
           isSaving={isSaving}
           setChangeValue={setValuePomodoro}
         />
 
         <ChangeValue
-          textContent="Short Break"
+          textContent={SHORT_MODE}
           isSaving={isSaving}
           setChangeValue={setValueShortBreak}
         />
 
         <ChangeValue
-          textContent="Long Break"
+          textContent={LONG_MODE}
           isSaving={isSaving}
           setChangeValue={setValueLongBreak}
         />
@@ -148,5 +141,11 @@ const styles = StyleSheet.create({
       backgroundColor: "red",
       padding: 20,
     },
+    input: {
+      backgroundColor: "#9492a1",
+      borderRadius: 10,
+      textAlign: "center",
+      fontSize: 16,
+    },
   }),
-  { container, titleCont, title, contOptions, saveBtn } = styles;
+  { container, titleCont, title, contOptions, saveBtn, input } = styles;

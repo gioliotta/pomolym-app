@@ -1,22 +1,21 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-// import { LONG_MODE, POMO_MODE, SHORT_MODE } from "./consts";
 
 //* Save data in local storage.
-async function setStoreData(key, value) {
+async function setStoreData(value) {
   try {
-    const jsonValue = JSON.stringify(value);
-    console.log("Key: " + key + " Value: " + jsonValue / 60);
-    await AsyncStorage.setItem(key, jsonValue);
+    await AsyncStorage.setItem("pomolym-data", value);
   } catch (err) {
     console.error("Error: " + err.message);
   }
 }
 
 //* Get data from local storage.
-async function getStoreData(key) {
+async function getStoreData() {
   try {
-    const jsonValue = await AsyncStorage.getItem(key);
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
+    const value = await AsyncStorage.getItem("pomolym-data");
+    if (value !== null) {
+      return value;
+    }
   } catch (err) {
     console.error("Error: " + err.message);
   }

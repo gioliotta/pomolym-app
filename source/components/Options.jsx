@@ -17,17 +17,17 @@ function Options(props) {
     MODES = [
       {
         mode: POMO_MODE,
-        name: "Pomodoro",
+        name: POMO_MODE,
         id: 1,
       },
       {
         mode: SHORT_MODE,
-        name: "Short Break",
+        name: SHORT_MODE,
         id: 2,
       },
       {
         mode: LONG_MODE,
-        name: "Long Break",
+        name: LONG_MODE,
         id: 3,
       },
     ];

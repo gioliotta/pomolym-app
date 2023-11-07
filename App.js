@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Home from "./source/pages/Home.jsx";
 import Configuration from "./source/pages/Configuration.jsx";
+import Load from "./source/components/Load.jsx";
 import {
   HOME_PAGE,
   CONFIG_PAGE,
@@ -8,7 +10,6 @@ import {
   SHORT_MODE,
   LONG_MODE,
 } from "./source/utils/consts.js";
-import { getStoreData } from "./source/utils/localData.js";
 
 const initialPomodoroValue = 25 * 60,
   initialShortBreakValue = 5 * 60,
@@ -17,39 +18,42 @@ const initialPomodoroValue = 25 * 60,
 function App() {
   const [thisPage, setThisPage] = useState(HOME_PAGE),
     [sounds, setSounds] = useState(false),
+    [valuesLoaded, setValuesLoaded] = useState(false),
     [valuePomodoro, setValuePomodoro] = useState(initialPomodoroValue),
     [valueShortBreak, setValueShortBreak] = useState(initialShortBreakValue),
     [valueLongBreak, setValueLongBreak] = useState(initialLongBreakValue);
 
-  useEffect(async () => {
-    const storedPomodoroValue = await getStoreData(POMO_MODE),
-      storedShortBreakValue = await getStoreData(SHORT_MODE),
-      storedLongBreakValue = await getStoreData(LONG_MODE);
-
-    if (storedPomodoroValue) {
-      return setValuePomodoro(storedPomodoroValue);
+  useEffect(() => {
+    async function getData() {
+      try {
+        const pomodoroValue = await AsyncStorage.getItem(POMO_MODE),
+          shortBreakValue = await AsyncStorage.getItem(SHORT_MODE),
+          longBreakValue = await AsyncStorage.getItem(LONG_MODE);
+        setValuePomodoro(Number(pomodoroValue));
+        setValueShortBreak(Number(shortBreakValue));
+        setValueLongBreak(Number(longBreakValue));
+        setValuesLoaded(true);
+      } catch (err) {
+        console.error("Error in AsyncStorage: " + err.message);
+      }
     }
-    if (storedShortBreakValue) {
-      return setValueShortBreak(storedShortBreakValue);
-    }
-    if (storedLongBreakValue) {
-      return setValueLongBreak(storedLongBreakValue);
-    }
+    getData();
   }, []);
 
   if (thisPage === HOME_PAGE) {
-    return (
-      <Home
-        setThisPage={setThisPage}
-        sounds={sounds}
-        valuePomodoro={valuePomodoro}
-        setValuePomodoro={setValuePomodoro}
-        valueShortBreak={valueShortBreak}
-        setValueShortBreak={setValueShortBreak}
-        valueLongBreak={valueLongBreak}
-        setValueLongBreak={setValueLongBreak}
-      />
-    );
+    if (valuesLoaded) {
+      return (
+        <Home
+          sounds={sounds}
+          setThisPage={setThisPage}
+          valuePomodoro={valuePomodoro}
+          valueShortBreak={valueShortBreak}
+          valueLongBreak={valueLongBreak}
+        />
+      );
+    } else {
+      return <Load />;
+    }
   }
 
   if (thisPage === CONFIG_PAGE) {
@@ -71,3 +75,5 @@ function App() {
 }
 
 export default App;
+
+// eas build -p android --profile preview

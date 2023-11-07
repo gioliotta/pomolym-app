@@ -1,16 +1,14 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, TouchableOpacity, StyleSheet } from "react-native";
 
 function OptionConfig(props) {
   const { textContent, onPressAction, icon } = props;
 
   return (
-    <View style={container}>
+    <TouchableOpacity style={container} onPress={onPressAction}>
       <Text style={text}>{textContent}</Text>
-      <TouchableOpacity style={btn} onPress={onPressAction}>
-        {icon}
-      </TouchableOpacity>
-    </View>
+      {icon}
+    </TouchableOpacity>
   );
 }
 
@@ -26,12 +24,10 @@ const styles = StyleSheet.create({
       borderBottomWidth: 0.8,
       borderColor: "#8d8d8d",
     },
-    btn: {
-      // alignSelf: "flex-end",
-    },
+
     text: {
       color: "#fff",
       fontSize: 20,
     },
   }),
-  { container, btn, text } = styles;
+  { container, text } = styles;

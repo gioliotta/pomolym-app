@@ -20,6 +20,7 @@ import {
   AntDesign as BackIcon,
   Octicons as VlmIcon,
   MaterialIcons as CleanIcon,
+  Feather as CoffeeIcon,
 } from "@expo/vector-icons";
 
 function Configuration(props) {
@@ -48,20 +49,6 @@ function Configuration(props) {
       </View>
 
       <View style={contOptions}>
-        <OptionConfig
-          textContent={sounds ? "Sounds On" : "Sounds Off"}
-          onPressAction={() => setSounds(!sounds)}
-          icon={
-            <VlmIcon name={sounds ? "unmute" : "mute"} size={24} color="#fff" />
-          }
-        />
-
-        <OptionConfig
-          textContent="Clear cache"
-          onPressAction={() => Alert.alert("Cache deleted")}
-          icon={<CleanIcon name="cleaning-services" size={24} color="#fff" />}
-        />
-
         <ChangeValue
           textContent={POMO_MODE}
           isSaving={isSaving}
@@ -80,24 +67,30 @@ function Configuration(props) {
           setChangeValue={setValueLongBreak}
         />
 
+        <OptionConfig
+          textContent={sounds ? "Sounds On" : "Sounds Off"}
+          onPressAction={() => setSounds(!sounds)}
+          icon={
+            <VlmIcon name={sounds ? "unmute" : "mute"} size={24} color="#fff" />
+          }
+        />
+
+        <OptionConfig
+          textContent="Clear cache"
+          onPressAction={() => Alert.alert("Coming soon...")}
+          icon={<CleanIcon name="cleaning-services" size={24} color="#fff" />}
+        />
+
+        <OptionConfig
+          textContent="Buy me a coffee"
+          onPressAction={() => Alert.alert("Coming soon...")}
+          icon={<CoffeeIcon name="coffee" size={24} color="#fff" />}
+        />
+
         <TouchableOpacity style={saveBtn} onPress={saveChanges}>
           <Text style={textSave}>Save Changes</Text>
         </TouchableOpacity>
       </View>
-
-      {/*
-       <View
-        style={{
-          width: "100%",
-          alignItems: "flex-end",
-          justifyContent: "center",
-        }}
-      >
-            <DonationsBtn />
-            <NotificationTest />
-  
-      </View> 
-      */}
     </SafeAreaView>
   );
 }

@@ -85,7 +85,7 @@ function Home(props) {
   return (
     <SafeAreaView style={container}>
       <StatusBar barStyle="light-content" backgroundColor="#000" />
-      <BetaMsg />
+      <SettingsIcon setThisPage={setThisPage} />
       <View style={contTimer}>
         <Options
           modeTime={modeTime}
@@ -117,7 +117,7 @@ function Home(props) {
           valueLongBreak={valueLongBreak}
         />
       </View>
-      <SettingsIcon setThisPage={setThisPage} />
+      <BetaMsg />
     </SafeAreaView>
   );
 }

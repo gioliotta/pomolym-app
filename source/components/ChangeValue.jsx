@@ -42,8 +42,8 @@ function ChangeValue(props) {
       <TextInput
         style={input}
         value={inputValue.toString()}
-        placeholder="enter the time"
-        placeholderTextColor="#000"
+        placeholder="time in minits"
+        placeholderTextColor="#d1d1d1"
         keyboardType="numeric"
         onChangeText={num => setInputValue(Number(num))}
         width={130}
@@ -66,14 +66,16 @@ const styles = StyleSheet.create({
       borderColor: "#8d8d8d",
     },
     input: {
-      backgroundColor: "#9492a1",
-      borderRadius: 10,
       textAlign: "center",
-      fontSize: 16,
+      color: "#fff",
+      borderWidth: 1,
+      borderColor: "#664EFF",
+      borderRadius: 10,
+      fontSize: 14,
     },
     text: {
-      color: "#9492a1",
-      fontSize: 19,
+      color: "#fff",
+      fontSize: 20,
     },
   }),
   { container, input, text } = styles;

@@ -23,13 +23,15 @@ const styles = StyleSheet.create({
       alignItems: "center",
       justifyContent: "space-between",
       flexDirection: "row",
+      borderBottomWidth: 0.8,
+      borderColor: "#8d8d8d",
     },
     btn: {
       // alignSelf: "flex-end",
     },
     text: {
-      color: "#9492a1",
-      fontSize: 19,
+      color: "#fff",
+      fontSize: 20,
     },
   }),
   { container, btn, text } = styles;

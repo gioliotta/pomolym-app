@@ -42,7 +42,7 @@ function Configuration(props) {
       <StatusBar barStyle="light-content" backgroundColor="#000" />
       <View style={titleCont}>
         <TouchableOpacity onPress={() => setThisPage(HOME_PAGE)}>
-          <BackIcon name="arrowleft" size={50} color="#9492a1" />
+          <BackIcon name="arrowleft" size={50} color="#fff" />
         </TouchableOpacity>
         <Text style={title}>Configuration</Text>
       </View>
@@ -52,20 +52,14 @@ function Configuration(props) {
           textContent={sounds ? "Sounds On" : "Sounds Off"}
           onPressAction={() => setSounds(!sounds)}
           icon={
-            <VlmIcon
-              name={sounds ? "unmute" : "mute"}
-              size={24}
-              color="#9492a1"
-            />
+            <VlmIcon name={sounds ? "unmute" : "mute"} size={24} color="#fff" />
           }
         />
 
         <OptionConfig
           textContent="Clear cache"
           onPressAction={() => Alert.alert("Cache deleted")}
-          icon={
-            <CleanIcon name="cleaning-services" size={24} color="#9492a1" />
-          }
+          icon={<CleanIcon name="cleaning-services" size={24} color="#fff" />}
         />
 
         <ChangeValue
@@ -87,7 +81,7 @@ function Configuration(props) {
         />
 
         <TouchableOpacity style={saveBtn} onPress={saveChanges}>
-          <Text>Save Changes</Text>
+          <Text style={textSave}>Save Changes</Text>
         </TouchableOpacity>
       </View>
 
@@ -127,7 +121,7 @@ const styles = StyleSheet.create({
       marginBottom: 50,
     },
     title: {
-      color: "#9492a1",
+      color: "#fff",
       fontSize: 28,
       letterSpacing: 1,
     },
@@ -138,14 +132,17 @@ const styles = StyleSheet.create({
       rowGap: 25,
     },
     saveBtn: {
-      backgroundColor: "red",
-      padding: 20,
-    },
-    input: {
-      backgroundColor: "#9492a1",
+      marginTop: 50,
+      backgroundColor: "#664EFF",
+      paddingHorizontal: 25,
+      paddingVertical: 15,
       borderRadius: 10,
-      textAlign: "center",
-      fontSize: 16,
+      borderWidth: 2,
+      borderColor: "#8c7aff",
+    },
+    textSave: {
+      color: "#fff",
+      fontSize: 18,
     },
   }),
-  { container, titleCont, title, contOptions, saveBtn, input } = styles;
+  { container, titleCont, title, contOptions, saveBtn, textSave } = styles;

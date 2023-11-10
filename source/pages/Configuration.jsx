@@ -36,7 +36,7 @@ function Configuration(props) {
 
   function saveChanges() {
     setIsSaving(true);
-    goToHome();
+    Alert.alert("Updated values");
   }
 
   function goToHome() {

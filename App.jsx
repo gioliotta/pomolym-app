@@ -12,30 +12,28 @@ import {
 } from "./source/utils/consts.js";
 
 function App() {
-  const initialPomodoroValue = 25 * 60;
-  const initialShortBreakValue = 5 * 60;
-  const initialLongBreakValue = 30 * 60;
-  const [thisPage, setThisPage] = useState(HOME_PAGE);
-  const [sounds, setSounds] = useState(false);
-  const [valuesLoaded, setValuesLoaded] = useState(false);
-  const [valuePomodoro, setValuePomodoro] = useState(initialPomodoroValue);
-  const [valueShortBreak, setValueShortBreak] = useState(
-    initialShortBreakValue
-  );
-  const [valueLongBreak, setValueLongBreak] = useState(initialLongBreakValue);
+  const initialPomodoroValue = 25 * 60,
+    initialShortBreakValue = 5 * 60,
+    initialLongBreakValue = 30 * 60,
+    [thisPage, setThisPage] = useState(HOME_PAGE),
+    [sounds, setSounds] = useState(false),
+    [valuesLoaded, setValuesLoaded] = useState(false),
+    [valuePomodoro, setValuePomodoro] = useState(initialPomodoroValue),
+    [valueShortBreak, setValueShortBreak] = useState(initialShortBreakValue),
+    [valueLongBreak, setValueLongBreak] = useState(initialLongBreakValue);
 
   useEffect(() => {
     async function getData() {
       try {
-        const pomodoroValue = await AsyncStorage.getItem(POMO_MODE);
-        const shortBreakValue = await AsyncStorage.getItem(SHORT_MODE);
-        const longBreakValue = await AsyncStorage.getItem(LONG_MODE);
+        const pomodoroValue = await AsyncStorage.getItem(POMO_MODE),
+          shortBreakValue = await AsyncStorage.getItem(SHORT_MODE),
+          longBreakValue = await AsyncStorage.getItem(LONG_MODE);
         setValuePomodoro(Number(pomodoroValue));
         setValueShortBreak(Number(shortBreakValue));
         setValueLongBreak(Number(longBreakValue));
         setValuesLoaded(true);
       } catch (err) {
-        console.error("Error in AsyncStorage: " + err.message);
+        console.error(`Error in AsyncStorage: ${err.message}`);
       }
     }
     getData();

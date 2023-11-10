@@ -42,7 +42,7 @@ function ChangeValue(props) {
       <TextInput
         style={input}
         value={inputValue.toString()}
-        placeholder="time in minits"
+        placeholder="time in minutes"
         placeholderTextColor="#d1d1d1"
         keyboardType="numeric"
         onChangeText={num => setInputValue(Number(num))}

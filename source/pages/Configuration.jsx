@@ -36,13 +36,18 @@ function Configuration(props) {
 
   function saveChanges() {
     setIsSaving(true);
+    goToHome();
+  }
+
+  function goToHome() {
+    setThisPage(HOME_PAGE);
   }
 
   return (
     <SafeAreaView style={container}>
       <StatusBar barStyle="light-content" backgroundColor="#000" />
       <View style={titleCont}>
-        <TouchableOpacity onPress={() => setThisPage(HOME_PAGE)}>
+        <TouchableOpacity onPress={goToHome}>
           <BackIcon name="arrowleft" size={50} color="#fff" />
         </TouchableOpacity>
         <Text style={title}>Configuration</Text>

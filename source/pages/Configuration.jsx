@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   StatusBar,
-  Alert,
 } from "react-native";
 import OptionConfig from "../components/OptionConfig.jsx";
 import ChangeValue from "../components/ChangeValue.jsx";
@@ -16,6 +15,7 @@ import {
   SHORT_MODE,
   LONG_MODE,
 } from "../utils/consts.js";
+import { confirmationAlert } from "../utils/commonFunctions.js";
 import {
   AntDesign as BackIcon,
   Octicons as VlmIcon,
@@ -36,10 +36,10 @@ function Configuration(props) {
 
   function saveChanges() {
     setIsSaving(true);
-    Alert.alert("Updated values");
+    confirmationAlert("Updated values");
   }
 
-  function goToHome() {
+  function backToHome() {
     setThisPage(HOME_PAGE);
   }
 
@@ -47,7 +47,7 @@ function Configuration(props) {
     <SafeAreaView style={container}>
       <StatusBar barStyle="light-content" backgroundColor="#000" />
       <View style={titleCont}>
-        <TouchableOpacity onPress={goToHome}>
+        <TouchableOpacity onPress={backToHome}>
           <BackIcon name="arrowleft" size={50} color="#fff" />
         </TouchableOpacity>
         <Text style={title}>Configuration</Text>
@@ -82,13 +82,13 @@ function Configuration(props) {
 
         <OptionConfig
           textContent="Clear cache"
-          onPressAction={() => Alert.alert("Coming soon...")}
+          onPressAction={() => confirmationAlert("Coming soon...")}
           icon={<CleanIcon name="cleaning-services" size={24} color="#fff" />}
         />
 
         <OptionConfig
           textContent="Buy me a coffee"
-          onPressAction={() => Alert.alert("Coming soon...")}
+          onPressAction={() => confirmationAlert("Coming soon...")}
           icon={<CoffeeIcon name="coffee" size={24} color="#fff" />}
         />
 

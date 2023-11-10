@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Alert } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { confirmationAlert } from "../utils/commonFunctions.js";
 import { MaterialIcons } from "@expo/vector-icons";
 
 function DonationsBtn() {
@@ -8,7 +9,7 @@ function DonationsBtn() {
       <TouchableOpacity
         style={btn}
         onPress={() =>
-          Alert.alert(
+          confirmationAlert(
             "$87.43 USD was transferred from your account to Staff Lym"
           )
         }

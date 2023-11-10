@@ -74,15 +74,3 @@ const styles = StyleSheet.create({
     },
   }),
   { container, input, text } = styles;
-
-// switch (textContent) {
-//   case POMO_MODE:
-//     await AsyncStorage.setItem(POMO_MODE, JSON.stringify(inputValue * 60));
-//     break;
-//   case SHORT_MODE:
-//     await AsyncStorage.setItem(SHORT_MODE, JSON.stringify(inputValue * 60));
-//     break;
-//   case LONG_MODE:
-//     await AsyncStorage.setItem(LONG_MODE, JSON.stringify(inputValue * 60));
-//     break;
-// }

@@ -74,3 +74,5 @@ function App() {
 }
 
 export default App;
+
+// eas build -p android --profile preview

@@ -1,19 +1,12 @@
 import React from "react";
-import { Alert, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 function BetaMsg() {
-  function onPressBetaBtn() {
-    Alert.alert(
-      "PomoLym",
-      "The application is in beta. It may contain errors or functions that do not execute correctly. If you encounter any problems, please report to: gioliotta.io@gmail.com"
-    );
-  }
-
   return (
     <View style={container}>
-      <TouchableOpacity style={btn} onPress={onPressBetaBtn}>
+      <View style={betaCont}>
         <Text style={betaText}>Beta</Text>
-      </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -26,7 +19,7 @@ const styles = StyleSheet.create({
       alignItems: "flex-end",
       justifyContent: "center",
     },
-    btn: {
+    betaCont: {
       width: 100,
       borderTopLeftRadius: 10,
       borderBottomLeftRadius: 10,
@@ -48,4 +41,4 @@ const styles = StyleSheet.create({
       borderColor: "#9492a1",
     },
   }),
-  { container, btn, betaText } = styles;
+  { container, betaCont, betaText } = styles;

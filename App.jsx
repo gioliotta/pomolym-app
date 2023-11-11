@@ -25,9 +25,13 @@ function App() {
   useEffect(() => {
     async function getData() {
       try {
-        const pomodoroValue = await AsyncStorage.getItem(POMO_MODE),
-          shortBreakValue = await AsyncStorage.getItem(SHORT_MODE),
-          longBreakValue = await AsyncStorage.getItem(LONG_MODE);
+        const pomodoroValue =
+            (await AsyncStorage.getItem(POMO_MODE)) ?? initialPomodoroValue,
+          shortBreakValue =
+            (await AsyncStorage.getItem(SHORT_MODE)) ?? initialShortBreakValue,
+          longBreakValue =
+            (await AsyncStorage.getItem(LONG_MODE)) ?? initialLongBreakValue;
+
         setValuePomodoro(Number(pomodoroValue));
         setValueShortBreak(Number(shortBreakValue));
         setValueLongBreak(Number(longBreakValue));
@@ -38,6 +42,20 @@ function App() {
     }
     getData();
   }, []);
+
+  useEffect(() => {
+    const zero = "0000",
+      verifyValues =
+        valuePomodoro == zero ||
+        valueShortBreak == zero ||
+        valueLongBreak == zero;
+
+    if (verifyValues) {
+      setValuePomodoro(initialPomodoroValue);
+      setValueShortBreak(initialShortBreakValue);
+      setValueLongBreak(initialLongBreakValue);
+    }
+  }, [valuesLoaded]);
 
   if (thisPage === HOME_PAGE) {
     if (valuesLoaded) {

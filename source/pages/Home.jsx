@@ -98,6 +98,7 @@ function Home(props) {
           valueLongBreak={valueLongBreak}
           setIsActive={setIsActive}
         />
+
         <Time
           pomodoro={pomodoro}
           shortBreak={shortBreak}

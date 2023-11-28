@@ -8,8 +8,8 @@ import {
 
 function Play(props) {
   const {
-    isActive,
-    setIsActive,
+    timeIsActive,
+    setTimeIsActive,
     modeTime,
     setPomodoro,
     setShortBreak,
@@ -20,7 +20,7 @@ function Play(props) {
   } = props;
 
   function handlePlay() {
-    isActive ? setIsActive(false) : setIsActive(true);
+    timeIsActive ? setTimeIsActive(false) : setTimeIsActive(true);
   }
 
   function handleReload() {
@@ -35,14 +35,14 @@ function Play(props) {
         setLongBreak(valueLongBreak);
         break;
     }
-    setIsActive(false);
+    setTimeIsActive(false);
   }
 
   return (
     <View style={container}>
       <TouchableOpacity onPress={handlePlay} style={btn}>
         <PlayIcon
-          name={isActive ? "pause" : "play"}
+          name={timeIsActive ? "pause" : "play"}
           size={50}
           color="#664EFF"
         />

@@ -12,6 +12,8 @@ function Home(props) {
   const {
       sounds,
       setThisPage,
+      timeIsActive,
+      setTimeIsActive,
       valuePomodoro,
       valueShortBreak,
       valueLongBreak,
@@ -19,8 +21,7 @@ function Home(props) {
     [pomodoro, setPomodoro] = useState(valuePomodoro),
     [shortBreak, setShortBreak] = useState(valueShortBreak),
     [longBreak, setLongBreak] = useState(valueLongBreak),
-    [modeTime, setModeTime] = useState(POMO_MODE),
-    [isActive, setIsActive] = useState(false);
+    [modeTime, setModeTime] = useState(POMO_MODE);
 
   useEffect(() => {
     let intervalTimer = null,
@@ -37,7 +38,7 @@ function Home(props) {
         break;
     }
 
-    if (isActive && intervalDuration > 0) {
+    if (timeIsActive && intervalDuration > 0) {
       intervalTimer = setInterval(() => {
         switch (modeTime) {
           case POMO_MODE:
@@ -80,7 +81,7 @@ function Home(props) {
     }
 
     return () => clearInterval(intervalTimer);
-  }, [pomodoro, shortBreak, longBreak, isActive, modeTime]);
+  }, [pomodoro, shortBreak, longBreak, timeIsActive, modeTime]);
 
   return (
     <SafeAreaView style={container}>
@@ -96,9 +97,8 @@ function Home(props) {
           valuePomodoro={valuePomodoro}
           valueShortBreak={valueShortBreak}
           valueLongBreak={valueLongBreak}
-          setIsActive={setIsActive}
+          setTimeIsActive={setTimeIsActive}
         />
-
         <Time
           pomodoro={pomodoro}
           shortBreak={shortBreak}
@@ -106,13 +106,13 @@ function Home(props) {
           modeTime={modeTime}
         />
         <Play
+          timeIsActive={timeIsActive}
+          setTimeIsActive={setTimeIsActive}
           setPomodoro={setPomodoro}
           setShortBreak={setShortBreak}
           setLongBreak={setLongBreak}
           sounds={sounds}
           modeTime={modeTime}
-          isActive={isActive}
-          setIsActive={setIsActive}
           valuePomodoro={valuePomodoro}
           valueShortBreak={valueShortBreak}
           valueLongBreak={valueLongBreak}

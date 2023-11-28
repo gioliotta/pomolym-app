@@ -12,7 +12,7 @@ function Options(props) {
       valueLongBreak,
       valueShortBreak,
       valuePomodoro,
-      setIsActive,
+      setTimeIsActive,
     } = props,
     MODES = [
       {
@@ -33,7 +33,7 @@ function Options(props) {
     ];
 
   function updateMode(mode) {
-    setIsActive(false);
+    setTimeIsActive(false);
     switch (mode) {
       case POMO_MODE:
         setModeTime(mode);

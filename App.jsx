@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
 import Home from "./source/pages/Home.jsx";
 import Configuration from "./source/pages/Configuration.jsx";
-import Load from "./source/components/Load.jsx";
+// import Load from "./source/components/Load.jsx";
 import {
   HOME_PAGE,
   CONFIG_PAGE,
-  POMO_MODE,
-  SHORT_MODE,
-  LONG_MODE,
+  // POMO_MODE,
+  // SHORT_MODE,
+  // LONG_MODE,
 } from "./source/utils/consts.js";
+// import BackgroundTimer from "react-native-background-timer";
+
+// BackgroundTimer.runBackgroundTimer(() => {
+//   console.log("Temporizador en segundo plano");
+// }, 1000);
+
+// BackgroundTimer.stopBackgroundTimer();
 
 function App() {
   const initialPomodoroValue = 25 * 60,
@@ -17,61 +24,30 @@ function App() {
     initialLongBreakValue = 30 * 60,
     [thisPage, setThisPage] = useState(HOME_PAGE),
     [sounds, setSounds] = useState(false),
+    [timeIsActive, setTimeIsActive] = useState(false),
     [valuesLoaded, setValuesLoaded] = useState(false),
     [valuePomodoro, setValuePomodoro] = useState(initialPomodoroValue),
     [valueShortBreak, setValueShortBreak] = useState(initialShortBreakValue),
     [valueLongBreak, setValueLongBreak] = useState(initialLongBreakValue);
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        const pomodoroValue =
-            (await AsyncStorage.getItem(POMO_MODE)) ?? initialPomodoroValue,
-          shortBreakValue =
-            (await AsyncStorage.getItem(SHORT_MODE)) ?? initialShortBreakValue,
-          longBreakValue =
-            (await AsyncStorage.getItem(LONG_MODE)) ?? initialLongBreakValue;
-
-        setValuePomodoro(Number(pomodoroValue));
-        setValueShortBreak(Number(shortBreakValue));
-        setValueLongBreak(Number(longBreakValue));
-        setValuesLoaded(true);
-      } catch (err) {
-        console.error(`Error in AsyncStorage: ${err.message}`);
-      }
-    }
-    getData();
-  }, []);
-
-  useEffect(() => {
-    const zero = "0000",
-      verifyValues =
-        valuePomodoro == zero ||
-        valueShortBreak == zero ||
-        valueLongBreak == zero;
-
-    if (verifyValues) {
-      setValuePomodoro(initialPomodoroValue);
-      setValueShortBreak(initialShortBreakValue);
-      setValueLongBreak(initialLongBreakValue);
-    }
-  }, [valuesLoaded]);
-
   if (thisPage === HOME_PAGE) {
-    if (valuesLoaded) {
-      return (
-        <Home
-          sounds={sounds}
-          setThisPage={setThisPage}
-          valuePomodoro={valuePomodoro}
-          valueShortBreak={valueShortBreak}
-          valueLongBreak={valueLongBreak}
-        />
-      );
-    } else {
-      return <Load />;
-    }
+    // if (valuesLoaded) {
+    return (
+      <Home
+        sounds={sounds}
+        setThisPage={setThisPage}
+        timeIsActive={timeIsActive}
+        setTimeIsActive={setTimeIsActive}
+        valuePomodoro={valuePomodoro}
+        valueShortBreak={valueShortBreak}
+        valueLongBreak={valueLongBreak}
+      />
+    );
   }
+  // }
+  // else {
+  //   return <Load />;
+  // }
 
   if (thisPage === CONFIG_PAGE) {
     return (
@@ -93,4 +69,38 @@ function App() {
 
 export default App;
 
-// eas build -p android --profile preview
+/* useEffect(() => {
+    async function getData() {
+      try {
+        const pomodoroValue =
+            (await AsyncStorage.getItem(POMO_MODE)) ?? initialPomodoroValue,
+          shortBreakValue =
+            (await AsyncStorage.getItem(SHORT_MODE)) ?? initialShortBreakValue,
+          longBreakValue =
+            (await AsyncStorage.getItem(LONG_MODE)) ?? initialLongBreakValue;
+
+        setValuePomodoro(Number(pomodoroValue));
+        setValueShortBreak(Number(shortBreakValue));
+        setValueLongBreak(Number(longBreakValue));
+        setValuesLoaded(true);
+      } catch (err) {
+        console.error(`Error in AsyncStorage: ${err.message}`);
+      }
+    }
+    return () => getData();
+  }, []);
+
+  useEffect(() => {
+    const zero = "0000",
+      verifyValues =
+        valuePomodoro == zero ||
+        valueShortBreak == zero ||
+        valueLongBreak == zero;
+
+    if (verifyValues) {
+      setValuePomodoro(initialPomodoroValue);
+      setValueShortBreak(initialShortBreakValue);
+      setValueLongBreak(initialLongBreakValue);
+
+    }
+  }, [valuesLoaded]); */
